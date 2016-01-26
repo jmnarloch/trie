@@ -5,14 +5,9 @@
 [![Build Status](https://travis-ci.org/jmnarloch/trie.svg?branch=master)](https://travis-ci.org/jmnarloch/trie)
 [![Coverage Status](https://coveralls.io/repos/jmnarloch/trie/badge.svg?branch=master&service=github)](https://coveralls.io/github/jmnarloch/trie?branch=master)
 
-## Features
-
-Extends the Spring Cloud's `ProxyRouteLocator` with configurable matching strategy. The provided implementation allows
-to register a [Trie tree](https://en.wikipedia.org/wiki/Trie) for matching the routes.
-
 ## Setup
 
-Add the Spring Cloud starter to your project:
+Add the module to your project:
 
 ```xml
 <dependency>
@@ -22,7 +17,7 @@ Add the Spring Cloud starter to your project:
 </dependency>
 ```
 
-## Implementation details
+## Features
 
 The Trie is a R way tree that is designed for efficient string searches.
 
