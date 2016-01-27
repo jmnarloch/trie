@@ -20,7 +20,7 @@ package io.jmnarloch.trie;
  *
  * @author Jakub Narloch
  */
-class CharArrayTrieNode<T> extends AbstractTrieNode<T, CharArrayTrieNode<T>> {
+class ArrayTrieNode<T> extends AbstractTrieNode<T, ArrayTrieNode<T>> {
 
     /**
      * The number of distinct children - resembles the 2 byte char distinct values.
@@ -30,34 +30,34 @@ class CharArrayTrieNode<T> extends AbstractTrieNode<T, CharArrayTrieNode<T>> {
     /**
      * The array of child nodes.
      */
-    private CharArrayTrieNode<T>[] next;
+    private ArrayTrieNode<T>[] next;
 
     /**
-     * Creates new instance of {@link CharArrayTrieNode} class.
+     * Creates new instance of {@link ArrayTrieNode} class.
      */
-    public CharArrayTrieNode() {
+    public ArrayTrieNode() {
         this(R);
     }
 
     /**
-     * Creates new instance of {@link CharArrayTrieNode} class with specific capacity.
+     * Creates new instance of {@link ArrayTrieNode} class with specific capacity.
      *
      * @param capacity the maximum number of distinct characters stored by this node
      */
     @SuppressWarnings("unchecked")
-    public CharArrayTrieNode(int capacity) {
+    public ArrayTrieNode(int capacity) {
         if(capacity < 0 || capacity > R) {
             throw new IllegalArgumentException(String.format("Capacity exceeds bounds must be in range [0, %d]", R));
         }
 
-        this.next = (CharArrayTrieNode<T>[]) new CharArrayTrieNode[capacity];
+        this.next = (ArrayTrieNode<T>[]) new ArrayTrieNode[capacity];
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void setNext(char c, CharArrayTrieNode<T> next) {
+    public void setNext(char c, ArrayTrieNode<T> next) {
         this.next[getIndex(c)] = next;
     }
 
@@ -65,7 +65,7 @@ class CharArrayTrieNode<T> extends AbstractTrieNode<T, CharArrayTrieNode<T>> {
      * {@inheritDoc}
      */
     @Override
-    public CharArrayTrieNode<T> getNext(char c) {
+    public ArrayTrieNode<T> getNext(char c) {
         if(!isValid(c)) {
             return null;
         }

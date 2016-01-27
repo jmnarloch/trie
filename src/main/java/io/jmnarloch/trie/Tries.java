@@ -32,26 +32,26 @@ public final class Tries {
     }
 
     /**
-     * Creates new instance of {@link CharArrayTrie}.
+     * Creates new instance of {@link ArrayTrie}.
      *
      * @param <T> the element type
-     * @return the instance of {@link CharArrayTrie}
+     * @return the instance of {@link ArrayTrie}
      */
-    public static <T> CharArrayTrie<T> newCharArrayTrie() {
-        return new CharArrayTrie<T>();
+    public static <T> ArrayTrie<T> newArrayTrie() {
+        return new ArrayTrie<T>();
     }
 
     /**
-     * Creates new instance of {@link CharArrayTrie} with node capacity. The capacity specifies how many distinct
+     * Creates new instance of {@link ArrayTrie} with node capacity. The capacity specifies how many distinct
      * characters can be stored by individual node, for instance to map only ASCII characters specify the capacity
      * of 128, in case of extended ASCII - 256.
      *
      * @param <T>      the element type
      * @param capacity the trie node character capacity
-     * @return the instance of {@link CharArrayTrie}
+     * @return the instance of {@link ArrayTrie}
      */
-    public static <T> CharArrayTrie<T> newCharArrayTrie(int capacity) {
-        return new CharArrayTrie<T>(capacity);
+    public static <T> ArrayTrie<T> newArrayTrie(int capacity) {
+        return new ArrayTrie<T>(capacity);
     }
 
     /**

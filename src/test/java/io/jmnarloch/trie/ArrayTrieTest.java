@@ -16,14 +16,14 @@
 package io.jmnarloch.trie;
 
 /**
- * Tests the {@link CharArrayTrie} class.
+ * Tests the {@link ArrayTrie} class.
  *
  * @author Jakub Narloch
  */
-public class CharArrayTrieTest extends BaseTrieTest {
+public class ArrayTrieTest extends BaseTrieTest {
 
     @Override
     protected Trie<String> createTrie() {
-        return new CharArrayTrie<String>();
+        return new ArrayTrie<String>();
     }
 }

@@ -20,30 +20,30 @@ package io.jmnarloch.trie;
  *
  * @author Jakub Narloch
  */
-public class CharArrayTrie<T> extends AbstractTrie<T, CharArrayTrieNode<T>> {
+public class ArrayTrie<T> extends AbstractTrie<T, ArrayTrieNode<T>> {
 
     /**
-     * Creates new instance of {@link CharArrayTrie}.
+     * Creates new instance of {@link ArrayTrie}.
      */
-    public CharArrayTrie() {
-        super(new TrieNodeFactory<T, CharArrayTrieNode<T>>() {
+    public ArrayTrie() {
+        super(new TrieNodeFactory<T, ArrayTrieNode<T>>() {
             @Override
-            public CharArrayTrieNode<T> createNode() {
-                return new CharArrayTrieNode<T>();
+            public ArrayTrieNode<T> createNode() {
+                return new ArrayTrieNode<T>();
             }
         });
     }
 
     /**
-     * Creates new instance of {@link CharArrayTrie} with specific capacity.
+     * Creates new instance of {@link ArrayTrie} with specific capacity.
      *
      * @param capacity the node capacity
      */
-    public CharArrayTrie(final int capacity) {
-        super(new TrieNodeFactory<T, CharArrayTrieNode<T>>() {
+    public ArrayTrie(final int capacity) {
+        super(new TrieNodeFactory<T, ArrayTrieNode<T>>() {
             @Override
-            public CharArrayTrieNode<T> createNode() {
-                return new CharArrayTrieNode<T>(capacity);
+            public ArrayTrieNode<T> createNode() {
+                return new ArrayTrieNode<T>(capacity);
             }
         });
     }

@@ -30,7 +30,7 @@ public class TriesTest {
     public void shouldCreateCharArrayTrie() {
 
         // when
-        Trie<String> trie = Tries.newCharArrayTrie();
+        Trie<String> trie = Tries.newArrayTrie();
 
         // then
         assertNotNull(trie);
@@ -40,7 +40,7 @@ public class TriesTest {
     public void shouldCreateCharArrayTrieWithCapacity() {
 
         // when
-        Trie<String> trie = Tries.newCharArrayTrie(127);
+        Trie<String> trie = Tries.newArrayTrie(127);
 
         // then
         assertNotNull(trie);

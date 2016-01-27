@@ -26,7 +26,7 @@ in performance, but far most with the memory consumption.
 
 The available Trie implementations are:
 
-* CharArrayTrie
+* ArrayTrie
 * HashMapTrie
 * CharHashMapTrie - that uses Trove TCharObjectHashMap
 
