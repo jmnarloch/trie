@@ -16,14 +16,14 @@
 package io.jmnarloch.trie;
 
 /**
- * Tests the {@link CharHashMapTrie} class.
+ * Tests the {@link KolobokeCharHashMapTrieTest} class.
  *
  * @author Jakub Narloch
  */
-public class CharHashMapTrieTest extends BaseTrieTest {
+public class KolobokeCharHashMapTrieTest extends BaseTrieTest {
 
     @Override
     protected Trie<String> createTrie() {
-        return new CharHashMapTrie<String>();
+        return new KolobokeCharHashMapTrie<String>();
     }
 }

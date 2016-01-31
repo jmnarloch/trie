@@ -55,36 +55,57 @@ public final class Tries {
     }
 
     /**
-     * Creates new instance of {@link CharHashMapTrie}.
+     * Creates new instance of {@link TroveCharHashMapTrie}.
      *
      * @param <T> the element type
-     * @return the instance of {@link CharHashMapTrie}
+     * @return the instance of {@link TroveCharHashMapTrie}
      */
-    public static <T> CharHashMapTrie<T> newCharHashMapTrie() {
-        return new CharHashMapTrie<T>();
+    public static <T> TroveCharHashMapTrie<T> newTroveCharHashMapTrie() {
+        return new TroveCharHashMapTrie<T>();
     }
 
     /**
-     * Creates new instance of {@link CharHashMapTrie} with initial capacity.
+     * Creates new instance of {@link TroveCharHashMapTrie} with initial capacity.
      *
      * @param <T>             the element type
      * @param initialCapacity the initial capacity
-     * @return the instance of {@link CharHashMapTrie}
+     * @return the instance of {@link TroveCharHashMapTrie}
      */
-    public static <T> CharHashMapTrie<T> newCharHashMapTrie(int initialCapacity) {
-        return new CharHashMapTrie<T>(initialCapacity);
+    public static <T> TroveCharHashMapTrie<T> newTroveCharHashMapTrie(int initialCapacity) {
+        return new TroveCharHashMapTrie<T>(initialCapacity);
     }
 
     /**
-     * Creates new instance of {@link CharHashMapTrie} with initial capacity and load factor.
+     * Creates new instance of {@link TroveCharHashMapTrie} with initial capacity and load factor.
      *
      * @param <T>             the element type
      * @param initialCapacity the initial capacity
      * @param loadFactor      the load factor
-     * @return the instance of {@link CharHashMapTrie}
+     * @return the instance of {@link TroveCharHashMapTrie}
      */
-    public static <T> CharHashMapTrie<T> newCharHashMapTrie(int initialCapacity, float loadFactor) {
-        return new CharHashMapTrie<T>(initialCapacity, loadFactor);
+    public static <T> TroveCharHashMapTrie<T> newTroveCharHashMapTrie(int initialCapacity, float loadFactor) {
+        return new TroveCharHashMapTrie<T>(initialCapacity, loadFactor);
+    }
+
+    /**
+     * Creates new instance of {@link KolobokeCharHashMapTrie}.
+     *
+     * @param <T> the element type
+     * @return the instance of {@link KolobokeCharHashMapTrie}
+     */
+    public static <T> KolobokeCharHashMapTrie<T> newKolobokeCharHashMapTrie() {
+        return new KolobokeCharHashMapTrie<T>();
+    }
+
+    /**
+     * Creates new instance of {@link KolobokeCharHashMapTrie} with expected size.
+     *
+     * @param <T>             the element type
+     * @param expectedSize the expected size
+     * @return the instance of {@link TroveCharHashMapTrie}
+     */
+    public static <T> KolobokeCharHashMapTrie<T> newKolobokeCharHashMapTrie(int expectedSize) {
+        return new KolobokeCharHashMapTrie<T>(expectedSize);
     }
 
     /**

@@ -77,30 +77,50 @@ public class TriesTest {
     }
 
     @Test
-    public void shouldCreateCharHashMapTrie() {
+    public void shouldCreateTroveCharHashMapTrie() {
 
         // when
-        Trie<String> trie = Tries.newCharHashMapTrie();
+        Trie<String> trie = Tries.newTroveCharHashMapTrie();
 
         // then
         assertNotNull(trie);
     }
 
     @Test
-    public void shouldCreateCharHashMapTrieWithInitialCapacity() {
+    public void shouldCreateTroveCharHashMapTrieWithInitialCapacity() {
 
         // when
-        Trie<String> trie = Tries.newCharHashMapTrie(16);
+        Trie<String> trie = Tries.newTroveCharHashMapTrie(16);
 
         // then
         assertNotNull(trie);
     }
 
     @Test
-    public void shouldCreateCharHashMapTrieWithInitialCapacityAndLoadFactor() {
+    public void shouldCreateTroveCharHashMapTrieWithInitialCapacityAndLoadFactor() {
 
         // when
-        Trie<String> trie = Tries.newCharHashMapTrie(16, 0.75f);
+        Trie<String> trie = Tries.newTroveCharHashMapTrie(16, 0.75f);
+
+        // then
+        assertNotNull(trie);
+    }
+
+    @Test
+    public void shouldCreateKolobokeCharHashMapTrie() {
+
+        // when
+        Trie<String> trie = Tries.newKolobokeCharHashMapTrie();
+
+        // then
+        assertNotNull(trie);
+    }
+
+    @Test
+    public void shouldCreateKolobokeCharHashMapTrieWithInitialCapacity() {
+
+        // when
+        Trie<String> trie = Tries.newKolobokeCharHashMapTrie(16);
 
         // then
         assertNotNull(trie);

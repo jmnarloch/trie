@@ -54,6 +54,7 @@ compileJava {
 dependencies {
 
     compile (libraries.trove)
+    compile (libraries.kolobokeImpl)
 
     testCompile (libraries.junit)
     testCompile (libraries.mockito)

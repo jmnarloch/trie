@@ -28,7 +28,8 @@ The available Trie implementations are:
 
 * ArrayTrie
 * HashMapTrie
-* CharHashMapTrie - that uses Trove TCharObjectHashMap
+* TroveCharHashMapTrie - that uses Trove TCharObjectHashMap
+* KolobokeCharHashMapTrie - that uses Koloboke HashCharObjMap
 
 ## TODO
 

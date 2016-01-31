@@ -23,44 +23,44 @@ import gnu.trove.map.hash.TCharObjectHashMap;
  *
  * @author Jakub Narloch
  */
-class CharHashMapTrieNode<T> extends AbstractTrieNode<T, CharHashMapTrieNode<T>> {
+class TroveCharHashMapTrieNode<T> extends AbstractTrieNode<T, TroveCharHashMapTrieNode<T>> {
 
     /**
      * The map of children nodes.
      */
-    private final TCharObjectMap<CharHashMapTrieNode<T>> next;
+    private final TCharObjectMap<TroveCharHashMapTrieNode<T>> next;
 
     /**
-     * Creates new instance of {@link CharHashMapTrieNode}.
+     * Creates new instance of {@link TroveCharHashMapTrieNode}.
      */
-    public CharHashMapTrieNode() {
-        next = new TCharObjectHashMap<CharHashMapTrieNode<T>>();
+    public TroveCharHashMapTrieNode() {
+        next = new TCharObjectHashMap<TroveCharHashMapTrieNode<T>>();
     }
 
     /**
-     * Creates new instance of {@link CharHashMapTrieNode} with specific initial capacity.
+     * Creates new instance of {@link TroveCharHashMapTrieNode} with specific initial capacity.
      *
      * @param initialCapacity the initial capacity
      */
-    public CharHashMapTrieNode(int initialCapacity) {
-        next = new TCharObjectHashMap<CharHashMapTrieNode<T>>(initialCapacity);
+    public TroveCharHashMapTrieNode(int initialCapacity) {
+        next = new TCharObjectHashMap<TroveCharHashMapTrieNode<T>>(initialCapacity);
     }
 
     /**
-     * Creates new instance of {@link CharHashMapTrieNode} with specific initial capacity and load factor.
+     * Creates new instance of {@link TroveCharHashMapTrieNode} with specific initial capacity and load factor.
      *
      * @param initialCapacity the initial capacity
      * @param loadFactor      the load factor
      */
-    public CharHashMapTrieNode(int initialCapacity, float loadFactor) {
-        next = new TCharObjectHashMap<CharHashMapTrieNode<T>>(initialCapacity, loadFactor);
+    public TroveCharHashMapTrieNode(int initialCapacity, float loadFactor) {
+        next = new TCharObjectHashMap<TroveCharHashMapTrieNode<T>>(initialCapacity, loadFactor);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void setNext(char c, CharHashMapTrieNode<T> next) {
+    public void setNext(char c, TroveCharHashMapTrieNode<T> next) {
         this.next.put(c, next);
     }
 
@@ -68,7 +68,7 @@ class CharHashMapTrieNode<T> extends AbstractTrieNode<T, CharHashMapTrieNode<T>>
      * {@inheritDoc}
      */
     @Override
-    public CharHashMapTrieNode<T> getNext(char c) {
+    public TroveCharHashMapTrieNode<T> getNext(char c) {
         return next.get(c);
     }
 
