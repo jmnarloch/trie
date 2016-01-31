@@ -3,7 +3,7 @@ ext {
     libraries = [
 
             trove       : 'net.sf.trove4j:trove4j:3.0.3',
-            kolobokeImpl: 'net.openhft:koloboke-impl-jdk8:0.6.8',
+            kolobokeImpl: 'net.openhft:koloboke-impl-jdk6-7:0.6.8',
 
             junit       : 'junit:junit:4.12',
             mockito     : 'org.mockito:mockito-all:1.10.19'
