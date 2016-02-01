@@ -21,7 +21,7 @@ Add the module to your project:
 
 The Trie is a R way tree that is designed for efficient string searches.
 
-At this moment this component defines three different implementation of the Trie, all of which differs slightly
+At this moment this component defines four different implementation of the Trie, all of which differs slightly
 in performance, but far most with the memory consumption.
 
 The available Trie implementations are:
