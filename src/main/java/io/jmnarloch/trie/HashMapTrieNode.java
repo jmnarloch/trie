@@ -17,6 +17,7 @@ package io.jmnarloch.trie;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * A {@link HashMap} backed trie node.
@@ -78,5 +79,20 @@ class HashMapTrieNode<T> extends AbstractTrieNode<T, HashMapTrieNode<T>> {
     @Override
     public void removeNext(char c) {
         next.remove(c);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public char[] getKeys() {
+        final Set<Character> keySet = next.keySet();
+        final char[] keys = new char[keySet.size()];
+        int ind = 0;
+        for(char key : keySet) {
+            keys[ind] = key;
+            ind++;
+        }
+        return keys;
     }
 }

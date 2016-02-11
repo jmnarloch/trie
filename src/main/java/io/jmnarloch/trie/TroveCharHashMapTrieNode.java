@@ -79,4 +79,12 @@ class TroveCharHashMapTrieNode<T> extends AbstractTrieNode<T, TroveCharHashMapTr
     public void removeNext(char c) {
         next.remove(c);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public char[] getKeys() {
+        return next.keys();
+    }
 }

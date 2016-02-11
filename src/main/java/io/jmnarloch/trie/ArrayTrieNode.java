@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,7 +23,7 @@ package io.jmnarloch.trie;
 class ArrayTrieNode<T> extends AbstractTrieNode<T, ArrayTrieNode<T>> {
 
     /**
-     * The number of distinct children - resembles the 2 byte char distinct values.
+     * The number of distinct children - resembles the 2 byte char number of distinct values.
      */
     private static final int R = 0xffff;
 
@@ -46,7 +46,7 @@ class ArrayTrieNode<T> extends AbstractTrieNode<T, ArrayTrieNode<T>> {
      */
     @SuppressWarnings("unchecked")
     public ArrayTrieNode(int capacity) {
-        if(capacity < 0 || capacity > R) {
+        if (capacity < 0 || capacity > R) {
             throw new IllegalArgumentException(String.format("Capacity exceeds bounds must be in range [0, %d]", R));
         }
 
@@ -66,7 +66,7 @@ class ArrayTrieNode<T> extends AbstractTrieNode<T, ArrayTrieNode<T>> {
      */
     @Override
     public ArrayTrieNode<T> getNext(char c) {
-        if(!isValid(c)) {
+        if (!isValid(c)) {
             return null;
         }
         return next[getIndex(c)];
@@ -81,6 +81,27 @@ class ArrayTrieNode<T> extends AbstractTrieNode<T, ArrayTrieNode<T>> {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public char[] getKeys() {
+        int size = 0;
+        for (int ind = 0; ind < next.length; ind++) {
+            if(next[ind] != null) {
+                size++;
+            }
+        }
+        final char[] keys = new char[size];
+        for (int ind = 0, count = 0; ind < next.length && count < size; ind++) {
+            if (next[ind] != null) {
+                keys[count] = (char) ind;
+                count++;
+            }
+        }
+        return keys;
+    }
+
+    /**
      * Retrieves the code point of the given character.
      *
      * @param c the character
@@ -88,7 +109,7 @@ class ArrayTrieNode<T> extends AbstractTrieNode<T, ArrayTrieNode<T>> {
      * @throws IllegalArgumentException if character exceeds the node capacity
      */
     private int getIndex(char c) {
-        if(!isValid(c)) {
+        if (!isValid(c)) {
             throw new IllegalArgumentException(String.format("The character %c exceeds bounds.", c));
         }
         return c;

@@ -16,7 +16,10 @@
 package io.jmnarloch.trie;
 
 import java.util.Deque;
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * The base class for all {@link Trie} instances.
@@ -75,6 +78,19 @@ abstract class AbstractTrie<T, N extends AbstractTrie.TrieNode<T, N>> implements
      * {@inheritDoc}
      */
     @Override
+    public void putAll(Map<String, ? extends T> map) {
+        notNull(map, "Map can not be null");
+
+        final Set<? extends Map.Entry<String, ? extends T>> entries = map.entrySet();
+        for(Map.Entry<String, ? extends T> entry : entries) {
+            put(entry.getKey(), entry.getValue());
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public boolean containsKey(String key) {
         notEmpty(key, "Key must be not null or not empty string.");
 
@@ -101,11 +117,35 @@ abstract class AbstractTrie<T, N extends AbstractTrie.TrieNode<T, N>> implements
         return prefix(getRoot(), key);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String prefixKey(String key) {
+        notEmpty(key, "Key must be not null or not empty string.");
+
+        return prefixKey(getRoot(), key);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public T remove(String key) {
         notEmpty(key, "Key must be not null or not empty string.");
 
         return remove(getRoot(), key);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Set<String> keySet() {
+
+        final Set<String> keys = new HashSet<String>();
+        keys(getRoot(), keys);
+        return keys;
     }
 
     private T put(N root, String key, T value) {
@@ -171,6 +211,26 @@ abstract class AbstractTrie<T, N extends AbstractTrie.TrieNode<T, N>> implements
         return value;
     }
 
+    private String prefixKey(N node, String key) {
+
+        final StringBuilder path = new StringBuilder();
+        String prefix = null;
+        int index = 0;
+        while (node != null) {
+            if (node.hasValue()) {
+                prefix = path.toString();
+            }
+            if (index == key.length()) {
+                break;
+            }
+            final char c = getChar(key, index);
+            path.append(c);
+            node = node.getNext(c);
+            index++;
+        }
+        return prefix;
+    }
+
     protected T remove(N root, String key) {
 
         int index = 0;
@@ -207,6 +267,35 @@ abstract class AbstractTrie<T, N extends AbstractTrie.TrieNode<T, N>> implements
         return value;
     }
 
+    private void keys(N root, Set<String> keys) {
+
+        N node;
+        TraversedPath traversedPath;
+
+        final StringBuilder path = new StringBuilder();
+        final Deque<TraversedPath> stack = new LinkedList<TraversedPath>();
+        stack.push(new TraversedPath(TraversedPathAction.VISIT, -1, root));
+
+        while(!stack.isEmpty()) {
+            traversedPath = stack.pop();
+            if(traversedPath.action == TraversedPathAction.BACKUP) {
+                path.deleteCharAt(path.length() - 1);
+            } else {
+                node = traversedPath.node;
+                if(traversedPath.key != -1) {
+                    path.append((char)traversedPath.key);
+                }
+                if(node.hasValue()) {
+                    keys.add(path.toString());
+                }
+                for (char key : node.getKeys()) {
+                    stack.push(new TraversedPath(TraversedPathAction.BACKUP, -1, null));
+                    stack.push(new TraversedPath(TraversedPathAction.VISIT, key, node.getNext(key)));
+                }
+            }
+        }
+    }
+
     private char getChar(String key, int index) {
         return key.charAt(index);
     }
@@ -219,8 +308,15 @@ abstract class AbstractTrie<T, N extends AbstractTrie.TrieNode<T, N>> implements
         return nodeFactory.createNode();
     }
 
+    private void notNull(Object value, String message) {
+        if(value == null) {
+            throw new IllegalArgumentException(message);
+        }
+    }
+
     private void notEmpty(String value, String message) {
-        if(value == null || value.isEmpty()) {
+        notNull(value, message);
+        if(value.isEmpty()) {
             throw new IllegalArgumentException(message);
         }
     }
@@ -251,5 +347,26 @@ abstract class AbstractTrie<T, N extends AbstractTrie.TrieNode<T, N>> implements
         boolean hasValue();
 
         void removeValue();
+
+        char[] getKeys();
+    }
+
+    private enum TraversedPathAction {
+        VISIT, BACKUP
+    }
+
+    private final class TraversedPath {
+
+        private final TraversedPathAction action;
+
+        private final int key;
+
+        private final N node;
+
+        TraversedPath(TraversedPathAction action, int key, N node) {
+            this.action = action;
+            this.key = key;
+            this.node = node;
+        }
     }
 }

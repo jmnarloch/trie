@@ -24,7 +24,7 @@ import net.openhft.koloboke.collect.map.hash.HashCharObjMaps;
  *
  * @author Jakub Narloch
  */
-public class KolobokeCharHashMapTrieNode<T> extends AbstractTrieNode<T, KolobokeCharHashMapTrieNode<T>> {
+class KolobokeCharHashMapTrieNode<T> extends AbstractTrieNode<T, KolobokeCharHashMapTrieNode<T>> {
 
     /**
      * The map of children nodes.
@@ -69,5 +69,13 @@ public class KolobokeCharHashMapTrieNode<T> extends AbstractTrieNode<T, Koloboke
     @Override
     public void removeNext(char c) {
         next.remove(c);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public char[] getKeys() {
+        return next.keySet().toCharArray();
     }
 }

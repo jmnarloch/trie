@@ -15,12 +15,13 @@
  */
 package io.jmnarloch.trie;
 
-import io.jmnarloch.trie.Trie;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
@@ -37,7 +38,7 @@ public abstract class BaseTrieTest {
     private Trie<String> instance;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
 
         instance = createTrie();
         for (String value : getValues()) {
@@ -85,7 +86,32 @@ public abstract class BaseTrieTest {
     }
 
     @Test
-    public void shouldFindAllMatchingKeys() throws Exception {
+    public void shouldPutAllEntries() {
+
+        // given
+        instance = createTrie();
+
+        // and
+        final Map<String, String> entries = new HashMap<String, String>();
+        for(String value : getValues()) {
+            entries.put(value, value);
+        }
+
+        // when
+        instance.putAll(entries);
+
+        // then
+        for (String value : getValues()) {
+            // when
+            final String result = instance.get(value);
+
+            // then
+            assertEquals(value, result);
+        }
+    }
+    
+    @Test
+    public void shouldFindAllMatchingKeys() {
 
         for (String value : getValues()) {
             // when
@@ -97,7 +123,19 @@ public abstract class BaseTrieTest {
     }
 
     @Test
-    public void shouldFindAllPrefixKeys() throws Exception {
+    public void shouldFindAllPrefixKeys() {
+
+        for (String value : getValues()) {
+            // when
+            final String result = instance.prefixKey(value);
+
+            // then
+            assertEquals(value, result);
+        }
+    }
+
+    @Test
+    public void shouldFindAllPrefixKeysValues() {
 
         for (String value : getValues()) {
             // when
@@ -109,7 +147,7 @@ public abstract class BaseTrieTest {
     }
 
     @Test
-    public void shouldFindAllExistingKeys() throws Exception {
+    public void shouldFindAllExistingKeys() {
 
         for (String value : getValues()) {
             // when
@@ -153,6 +191,22 @@ public abstract class BaseTrieTest {
         assertTrue(instance.size() == 0);
         for (String value : getValues()) {
             assertNull(instance.get(value));
+        }
+    }
+
+    @Test
+    public void shouldGetAllKeys() {
+
+        // given
+        final Set<String> values = getValues();
+
+        // when
+        final Set<String> keys = instance.keySet();
+
+        assertEquals(values.size(), keys.size());
+        for (String value : values) {
+            // then
+            assertTrue(keys.contains(value));
         }
     }
 
