@@ -231,7 +231,7 @@ abstract class AbstractTrie<T, N extends AbstractTrie.TrieNode<T, N>> implements
         return prefix;
     }
 
-    protected T remove(N root, String key) {
+    private T remove(N root, String key) {
 
         int index = 0;
         N node = root;
