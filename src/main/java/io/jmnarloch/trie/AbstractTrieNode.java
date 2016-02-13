@@ -20,7 +20,7 @@ package io.jmnarloch.trie;
  *
  * @author Jakub Narloch
  */
-public abstract class AbstractTrieNode<T, N extends AbstractTrieNode<T, N>> implements AbstractTrie.TrieNode<T, N> {
+abstract class AbstractTrieNode<T, N extends AbstractTrieNode<T, N>> implements AbstractTrie.TrieNode<T, N> {
 
     /**
      * The node value.

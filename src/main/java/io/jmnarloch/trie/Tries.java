@@ -25,7 +25,7 @@ public final class Tries {
     /**
      * Creates new instances of {@link Tries}.
      *
-     * Private constructor prevents from instantation outside this class.
+     * Private constructor prevents from instantiation outside this class.
      */
     private Tries() {
         // empty constructor

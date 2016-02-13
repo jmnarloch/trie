@@ -183,10 +183,18 @@ abstract class AbstractTrie<T, N extends AbstractTrie.TrieNode<T, N>> implements
 
     private T get(N node, String key) {
 
+        final N found = getNode(node, key);
+        if(found == null) {
+            return null;
+        }
+        return found.getValue();
+    }
+
+    private N getNode(N node, String key) {
         int index = 0;
         while (node != null) {
             if (index == key.length()) {
-                return node.getValue();
+                return node;
             }
             node = node.getNext(getChar(key, index));
             index++;
@@ -214,11 +222,11 @@ abstract class AbstractTrie<T, N extends AbstractTrie.TrieNode<T, N>> implements
     private String prefixKey(N node, String key) {
 
         final StringBuilder path = new StringBuilder();
-        String prefix = null;
+        int longestPrefix = -1;
         int index = 0;
         while (node != null) {
             if (node.hasValue()) {
-                prefix = path.toString();
+                longestPrefix = index;
             }
             if (index == key.length()) {
                 break;
@@ -228,7 +236,10 @@ abstract class AbstractTrie<T, N extends AbstractTrie.TrieNode<T, N>> implements
             node = node.getNext(c);
             index++;
         }
-        return prefix;
+        if(longestPrefix == -1) {
+            return null;
+        }
+        return path.substring(0, longestPrefix + 1);
     }
 
     private T remove(N root, String key) {
