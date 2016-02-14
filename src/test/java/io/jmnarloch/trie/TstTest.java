@@ -16,29 +16,15 @@
 package io.jmnarloch.trie;
 
 /**
- * A convenient class for instantiating the Trie tries.
+ * Tests the {@link Tries} class.
  *
  * @author Jakub Narloch
  */
-public class Tsts {
+public class TstTest extends BaseTrieTest {
 
-    /**
-     * Creates new instances of {@link Tsts}.
-     *
-     * Private constructor prevents from instantiation outside this class.
-     */
-    private Tsts() {
-        // empty constructor
-    }
 
-    /**
-     * Creates new instance of ternary trie tree.
-     *
-     * @param <T> the element type
-     *
-     * @return a ternary trie tree.
-     */
-    public static <T> Tst<T> newTst() {
-        return new Tst<T>();
+    @Override
+    protected Trie<String> createTrie() {
+        return new Tst<String>();
     }
 }

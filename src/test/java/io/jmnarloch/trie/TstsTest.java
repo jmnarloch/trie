@@ -15,30 +15,24 @@
  */
 package io.jmnarloch.trie;
 
+import org.junit.Test;
+
+import static org.junit.Assert.assertNotNull;
+
 /**
- * A convenient class for instantiating the Trie tries.
+ * Tests the {@link Tries} class.
  *
  * @author Jakub Narloch
  */
-public class Tsts {
+public class TstsTest {
 
-    /**
-     * Creates new instances of {@link Tsts}.
-     *
-     * Private constructor prevents from instantiation outside this class.
-     */
-    private Tsts() {
-        // empty constructor
-    }
+    @Test
+    public void shouldCreateCharArrayTrie() {
 
-    /**
-     * Creates new instance of ternary trie tree.
-     *
-     * @param <T> the element type
-     *
-     * @return a ternary trie tree.
-     */
-    public static <T> Tst<T> newTst() {
-        return new Tst<T>();
+        // when
+        Tst<String> trie = Tsts.newTst();
+
+        // then
+        assertNotNull(trie);
     }
 }

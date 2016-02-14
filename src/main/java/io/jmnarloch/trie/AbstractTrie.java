@@ -239,7 +239,7 @@ abstract class AbstractTrie<T, N extends AbstractTrie.TrieNode<T, N>> implements
         if(longestPrefix == -1) {
             return null;
         }
-        return path.substring(0, longestPrefix + 1);
+        return path.substring(0, longestPrefix);
     }
 
     private T remove(N root, String key) {
