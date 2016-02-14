@@ -22,27 +22,41 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * A implementation of Ternary Trie Tree.
  *
+ * @author Jakub Narloch
  */
 public class Tst<T> implements Trie<T> {
 
     private TstNode root;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isEmpty() {
         return size() == 0;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int size() {
         return root != null ? root.size : 0;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public T put(String key, T value) {
         return put(root, key, value);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void putAll(Map<String, ? extends T> map) {
 
@@ -51,34 +65,54 @@ public class Tst<T> implements Trie<T> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean containsKey(String key) {
         return get(key) != null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public T get(String key) {
         return get(root, key);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public T prefix(String key) {
         return prefix(root, key);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String prefixKey(String key) {
         return prefixKey(root, key);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public T remove(String key) {
-        return null;
+        return remove(root, key);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Set<String> keySet() {
-        return new HashSet<>();
+        final HashSet<String> keys = new HashSet<>();
+        keys(root, keys);
+        return keys;
     }
 
     private T put(TstNode root, String key, T value) {
@@ -123,6 +157,7 @@ public class Tst<T> implements Trie<T> {
 
         node = new TstNode();
         node.value = value;
+        node.size = 1;
         prev.mid = node;
 
         while(!stack.isEmpty()) {
@@ -155,6 +190,9 @@ public class Tst<T> implements Trie<T> {
         T value = null;
         while(node != null) {
             if(index == key.length()) {
+                if(node.value != null) {
+                    value = node.value;
+                }
                 break;
             }
             final char c = getChar(key, index);
@@ -165,9 +203,6 @@ public class Tst<T> implements Trie<T> {
                 index++;
             }
             node = moveNext(node, c);
-        }
-        if(node != null && node.value != null) {
-            value = node.value;
         }
         return value;
     }
@@ -180,6 +215,9 @@ public class Tst<T> implements Trie<T> {
 
         while(node != null) {
             if(index == key.length()) {
+                if(node.value != null) {
+                    longestPrefix = index;
+                }
                 break;
             }
             final char c = getChar(key, index);
@@ -192,13 +230,89 @@ public class Tst<T> implements Trie<T> {
             }
             node = moveNext(node, c);
         }
-        if(node != null && node.value != null) {
-            longestPrefix = index;
-        }
         if(longestPrefix == -1) {
             return null;
         }
         return path.substring(0, longestPrefix);
+    }
+
+    private T remove(TstNode node, String key) {
+
+        int index = 0;
+
+        final Deque<TstNode> stack = new LinkedList<>();
+
+        while(node != null) {
+            if(index == key.length()) {
+                break;
+            }
+            final char c =  getChar(key, index);
+            if(c == node.c) {
+                index++;
+            }
+            stack.push(node);
+            node = moveNext(node, c);
+        }
+
+        if(index < key.length() || node == null || node.value == null) {
+            return null;
+        }
+        final T value = node.value;
+        node.value = null;
+        node.size -= 1;
+
+        TstNode prev = node;
+        while(!stack.isEmpty()) {
+            node = stack.pop();
+            node.size -= 1;
+
+            if(prev.size == 0) {
+                if(node.left == prev) {
+                    node.left = null;
+                } else if (node.right == prev) {
+                    node.right = null;
+                } else {
+                    node.mid = null;
+                }
+            }
+            prev = node;
+        }
+        if(isEmpty()) {
+            root = null;
+        }
+        return value;
+    }
+
+    private void keys(TstNode root, HashSet<String> keys) {
+
+        final StringBuilder path = new StringBuilder();
+        final Deque<TraversedPath> stack = new LinkedList<>();
+        stack.push(new TraversedPath(TraversedPathAction.VISIT, -1, root));
+
+        while(!stack.isEmpty()) {
+            final TraversedPath traversedPath = stack.pop();
+            if(traversedPath.action == TraversedPathAction.BACKUP) {
+                path.deleteCharAt(path.length() - 1);
+                continue;
+            }
+            if(traversedPath.c != -1) {
+                path.append((char)traversedPath.c);
+            }
+            final TstNode node = traversedPath.node;
+            if(node.value != null) {
+                keys.add(path.toString());
+            }
+            if(node.right != null) {
+                stack.push(new TraversedPath(TraversedPathAction.VISIT, -1, node.right));
+            }
+            if(node.mid != null) {
+                stack.push(new TraversedPath(TraversedPathAction.BACKUP, -1, null));
+                stack.push(new TraversedPath(TraversedPathAction.VISIT, node.c, node.mid));
+            }
+            if(node.left != null) {
+                stack.push(new TraversedPath(TraversedPathAction.VISIT, -1, node.left));
+            }
+        }
     }
 
     private TstNode moveNext(TstNode node, char c) {
@@ -214,6 +328,23 @@ public class Tst<T> implements Trie<T> {
 
     private char getChar(String key, int index) {
         return key.charAt(index);
+    }
+
+    private enum TraversedPathAction {
+        VISIT, BACKUP
+    }
+
+    private final class TraversedPath {
+
+        private final TraversedPathAction action;
+        private final TstNode node;
+        private final int c;
+
+        public TraversedPath(TraversedPathAction action, int c, TstNode node) {
+            this.action = action;
+            this.c = c;
+            this.node = node;
+        }
     }
 
     private final class TstNode {

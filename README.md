@@ -19,6 +19,8 @@ Add the module to your project:
 
 ## Features
 
+### Trie
+
 The Trie is a R way tree that is designed for efficient string searches.
 
 At this moment this component defines four different implementation of the Trie, all of which differs slightly
@@ -31,9 +33,17 @@ The available Trie implementations are:
 * TroveCharHashMapTrie - that uses Trove TCharObjectHashMap
 * KolobokeCharHashMapTrie - that uses Koloboke HashCharObjMap
 
+### Ternary Trie Tree
+
+In effort to minimize the memory consumption we can design our tree as a 3-way with node links corresponding to character
+being lower, equal or greater then given nodes character.
+
+The available implementation:
+
+* Tst
+
 ## TODO
 
-* TST
 * Compressed trie - Patricia trie
 * Immutable trie
 
