@@ -64,7 +64,7 @@ dependencies {
 }
 
 jmh {
-    include = 'io\\.jmnarloch\\.trie\\..*'
+    include = 'io\\.jmnarloch\\.trie\\.Tst.*'
     iterations = 10
 }
 
