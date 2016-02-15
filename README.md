@@ -35,8 +35,8 @@ The available Trie implementations are:
 
 ### Ternary Trie Tree
 
-In effort to minimize the memory consumption we can design our tree as a 3-way with node links corresponding to character
-being lower, equal or greater then given nodes character.
+In effort to minimize the memory consumption we can design our tree as a 3-way tree with node links corresponding to character
+being lower, equal or greater then given node character.
 
 The available implementation:
 
@@ -44,16 +44,17 @@ The available implementation:
 
 ## Benchmark
 
-Project includes simple JMH benchmark that measures the average operation time of performing basic operations on the
-data structures that has been populated with 1024 unique entries.
+Project includes simple JMH benchmark that measures the throughput of selected operations on the data structures.
+For the sake of the benchmark every Trie instance has been populated with 1024 unique entries.
+The benchmark measures the time of retrieving and item or replacing it's value.
 
-| Data structure       | put() (ns/op) | get() (ns/op) |
-|----------------------|---------------|---------------|
-| Tst                  |    422,925    |    122,899    |
-| ArrayTrie            |    324,356    |    141,910    |
-| HashMapTrie          |    543,414    |    440,765    |
-| TroveCharHashMapTrie |    638,327    |    576,397    |
-| KolobokeHashMapTrie  |               |               |
+| Data structure          | put() (ops/sec) | get() (ops/sec) |
+|-------------------------|-----------------|-----------------|
+| Tst                     |   2299545,308   |   8842305,865   |
+| ArrayTrie               |                 |   6006965,043   |
+| HashMapTrie             |                 |   2256343,001   |
+| TroveCharHashMapTrie    |                 |   1823093,485   |
+| KolobokeCharHashMapTrie |                 |                 |
 
 ## TODO
 

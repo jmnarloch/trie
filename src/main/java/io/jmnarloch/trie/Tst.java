@@ -63,7 +63,7 @@ public class Tst<T> implements Trie<T> {
     public void putAll(Map<String, ? extends T> map) {
         notNull(map, "Map can not be null");
 
-        for(Map.Entry<String, ? extends T> entry : map.entrySet()) {
+        for (Map.Entry<String, ? extends T> entry : map.entrySet()) {
             put(entry.getKey(), entry.getValue());
         }
     }
@@ -133,28 +133,32 @@ public class Tst<T> implements Trie<T> {
         int index = 0;
         char prevC = 0;
 
+        char c = getChar(key, index);
+
         TstNode node = root, prev = null;
         final Deque<TstNode> stack = new LinkedList<>();
 
-        while(index < key.length()) {
-            final char c = getChar(key, index);
-            if(node == null) {
+        while (index < key.length()) {
+            if (node == null) {
                 node = new TstNode();
                 node.c = c;
-                if(prev == null) {
+                if (prev == null) {
                     this.root = node;
                 } else {
-                    if(prevC < prev.c) {
+                    if (prevC < prev.c) {
                         prev.left = node;
-                    } else if(prevC > prev.c) {
+                    } else if (prevC > prev.c) {
                         prev.right = node;
                     } else {
                         prev.mid = node;
                     }
                 }
             }
-            if(c == node.c) {
+            if (c == node.c) {
                 index++;
+                if(index < key.length()) {
+                    c = getChar(key, index);
+                }
             }
             prev = node;
             prevC = c;
@@ -162,7 +166,7 @@ public class Tst<T> implements Trie<T> {
             node = moveNext(node, c);
         }
 
-        if(node != null) {
+        if (node != null) {
             T oldValue = node.value;
             node.value = value;
             return oldValue;
@@ -173,7 +177,7 @@ public class Tst<T> implements Trie<T> {
         node.size = 1;
         prev.mid = node;
 
-        while(!stack.isEmpty()) {
+        while (!stack.isEmpty()) {
             node = stack.pop();
             node.size += 1;
         }
@@ -183,13 +187,17 @@ public class Tst<T> implements Trie<T> {
     private T get(TstNode node, String key) {
 
         int index = 0;
-        while(node != null) {
-            if(index == key.length()) {
+        char c = getChar(key, index);
+
+        while (node != null) {
+            if (index == key.length()) {
                 return node.value;
             }
-            final char c =  getChar(key, index);
-            if(c == node.c) {
+            if (c == node.c) {
                 index++;
+                if(index < key.length()) {
+                    c = getChar(key, index);
+                }
             }
             node = moveNext(node, c);
 
@@ -201,19 +209,23 @@ public class Tst<T> implements Trie<T> {
 
         int index = 0;
         T value = null;
-        while(node != null) {
-            if(index == key.length()) {
-                if(node.value != null) {
+        char c = getChar(key, index);
+
+        while (node != null) {
+            if (index == key.length()) {
+                if (node.value != null) {
                     value = node.value;
                 }
                 break;
             }
-            final char c = getChar(key, index);
-            if(c == node.c) {
-                if(node.value != null) {
+            if (c == node.c) {
+                if (node.value != null) {
                     value = node.value;
                 }
                 index++;
+                if(index < key.length()) {
+                    c = getChar(key, index);
+                }
             }
             node = moveNext(node, c);
         }
@@ -225,25 +237,28 @@ public class Tst<T> implements Trie<T> {
         final StringBuilder path = new StringBuilder();
         int index = 0;
         int longestPrefix = -1;
+        char c = getChar(key, index);
 
-        while(node != null) {
-            if(index == key.length()) {
-                if(node.value != null) {
+        while (node != null) {
+            if (index == key.length()) {
+                if (node.value != null) {
                     longestPrefix = index;
                 }
                 break;
             }
-            final char c = getChar(key, index);
-            if(c == node.c) {
+            if (c == node.c) {
                 path.append(c);
                 index++;
-                if(node.value != null) {
+                if (node.value != null) {
                     longestPrefix = index;
+                }
+                if(index < key.length()) {
+                    c = getChar(key, index);
                 }
             }
             node = moveNext(node, c);
         }
-        if(longestPrefix == -1) {
+        if (longestPrefix == -1) {
             return null;
         }
         return path.substring(0, longestPrefix);
@@ -252,22 +267,24 @@ public class Tst<T> implements Trie<T> {
     private T remove(TstNode node, String key) {
 
         int index = 0;
-
+        char c = getChar(key, index);
         final Deque<TstNode> stack = new LinkedList<>();
 
-        while(node != null) {
-            if(index == key.length()) {
+        while (node != null) {
+            if (index == key.length()) {
                 break;
             }
-            final char c =  getChar(key, index);
-            if(c == node.c) {
+            if (c == node.c) {
                 index++;
+                if(index < key.length()) {
+                    c = getChar(key, index);
+                }
             }
             stack.push(node);
             node = moveNext(node, c);
         }
 
-        if(index < key.length() || node == null || node.value == null) {
+        if (index < key.length() || node == null || node.value == null) {
             return null;
         }
         final T value = node.value;
@@ -275,12 +292,12 @@ public class Tst<T> implements Trie<T> {
         node.size -= 1;
 
         TstNode prev = node;
-        while(!stack.isEmpty()) {
+        while (!stack.isEmpty()) {
             node = stack.pop();
             node.size -= 1;
 
-            if(prev.size == 0) {
-                if(node.left == prev) {
+            if (prev.size == 0) {
+                if (node.left == prev) {
                     node.left = null;
                 } else if (node.right == prev) {
                     node.right = null;
@@ -290,7 +307,7 @@ public class Tst<T> implements Trie<T> {
             }
             prev = node;
         }
-        if(isEmpty()) {
+        if (isEmpty()) {
             root = null;
         }
         return value;
@@ -302,36 +319,36 @@ public class Tst<T> implements Trie<T> {
         final Deque<TraversedPath> stack = new LinkedList<>();
         stack.push(new TraversedPath(TraversedPathAction.VISIT, -1, root));
 
-        while(!stack.isEmpty()) {
+        while (!stack.isEmpty()) {
             final TraversedPath traversedPath = stack.pop();
-            if(traversedPath.action == TraversedPathAction.BACKUP) {
+            if (traversedPath.action == TraversedPathAction.BACKUP) {
                 path.deleteCharAt(path.length() - 1);
                 continue;
             }
-            if(traversedPath.c != -1) {
-                path.append((char)traversedPath.c);
+            if (traversedPath.c != -1) {
+                path.append((char) traversedPath.c);
             }
             final TstNode node = traversedPath.node;
-            if(node.value != null) {
+            if (node.value != null) {
                 keys.add(path.toString());
             }
-            if(node.right != null) {
+            if (node.right != null) {
                 stack.push(new TraversedPath(TraversedPathAction.VISIT, -1, node.right));
             }
-            if(node.mid != null) {
+            if (node.mid != null) {
                 stack.push(new TraversedPath(TraversedPathAction.BACKUP, -1, null));
                 stack.push(new TraversedPath(TraversedPathAction.VISIT, node.c, node.mid));
             }
-            if(node.left != null) {
+            if (node.left != null) {
                 stack.push(new TraversedPath(TraversedPathAction.VISIT, -1, node.left));
             }
         }
     }
 
     private TstNode moveNext(TstNode node, char c) {
-        if(c < node.c) {
+        if (c < node.c) {
             node = node.left;
-        } else if(c > node.c) {
+        } else if (c > node.c) {
             node = node.right;
         } else {
             node = node.mid;
@@ -344,14 +361,14 @@ public class Tst<T> implements Trie<T> {
     }
 
     private void notNull(Object value, String message) {
-        if(value == null) {
+        if (value == null) {
             throw new IllegalArgumentException(message);
         }
     }
 
     private void notEmpty(String value, String message) {
         notNull(value, message);
-        if(value.isEmpty()) {
+        if (value.isEmpty()) {
             throw new IllegalArgumentException(message);
         }
     }

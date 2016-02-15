@@ -34,8 +34,8 @@ import java.util.concurrent.TimeUnit;
  * @author Jakub Narloch
  */
 @State(Scope.Thread)
-@BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.NANOSECONDS)
+@BenchmarkMode(Mode.Throughput)
+@OutputTimeUnit(TimeUnit.SECONDS)
 public abstract class BaseTrieBenchmark {
 
     private static final int VALUES = 1024;
@@ -55,41 +55,40 @@ public abstract class BaseTrieBenchmark {
         }
     }
 
-
     @Benchmark
-    public void benchmarkPut() {
+    public String benchmarkPut() {
 
-        trie.put(key, key);
+        return trie.put(key, key);
     }
 
     @Benchmark
-    public void benchmarkGet() {
+    public String benchmarkGet() {
 
-        trie.get(key);
+        return trie.get(key);
     }
 
     @Benchmark
-    public void benchmarkContains() {
+    public boolean benchmarkContains() {
 
-        trie.containsKey(key);
+        return trie.containsKey(key);
     }
 
     @Benchmark
-    public void benchmarkPrefix() {
+    public String benchmarkPrefix() {
 
-        trie.prefix(key);
+        return trie.prefix(key);
     }
 
     @Benchmark
-    public void benchmarkPrefixKey() {
+    public String benchmarkPrefixKey() {
 
-        trie.prefixKey(key);
+        return trie.prefixKey(key);
     }
 
     @Benchmark
-    public void benchmarkKeys() {
+    public Set<String> benchmarkKeys() {
 
-        trie.keySet();
+        return trie.keySet();
     }
 
     protected Set<String> getValues() {
