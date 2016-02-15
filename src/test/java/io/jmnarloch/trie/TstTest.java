@@ -22,7 +22,6 @@ package io.jmnarloch.trie;
  */
 public class TstTest extends BaseTrieTest {
 
-
     @Override
     protected Trie<String> createTrie() {
         return new Tst<String>();

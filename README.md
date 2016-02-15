@@ -42,6 +42,19 @@ The available implementation:
 
 * Tst
 
+## Benchmark
+
+Project includes simple JMH benchmark that measures the average operation time of performing basic operations on the
+data structures that has been populated with 1024 unique entries.
+
+| Data structure       | put() (ns/op) | get() (ns/op) |
+|----------------------|---------------|---------------|
+| Tst                  |               |               |
+| ArrayTrie            |    324,356    |    141,910    |
+| HashMapTrie          |    543,414    |    440,765    |
+| TroveCharHashMapTrie |    638,327    |    576,397    |
+| KolobokeHashMapTrie  |               |               |
+
 ## TODO
 
 * Compressed trie - Patricia trie

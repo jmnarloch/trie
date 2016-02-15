@@ -8,6 +8,7 @@ plugins {
     id "com.github.hierynomus.license" version "0.11.0"
     id 'net.researchgate.release' version '2.1.2'
     id 'com.github.kt3k.coveralls' version '2.4.0'
+    id 'me.champeau.gradle.jmh' version '0.2.0'
 }
 
 apply plugin: 'java'
@@ -20,6 +21,8 @@ apply from: 'gradle/release.gradle'
 
 apply plugin: 'findbugs'
 apply plugin: 'pmd'
+
+apply plugin: 'me.champeau.gradle.jmh'
 
 apply plugin: 'com.github.kt3k.coveralls'
 
@@ -58,6 +61,11 @@ dependencies {
 
     testCompile (libraries.junit)
     testCompile (libraries.mockito)
+}
+
+jmh {
+    include = 'io\\.jmnarloch\\.trie\\..*'
+    iterations = 10
 }
 
 findbugs {
