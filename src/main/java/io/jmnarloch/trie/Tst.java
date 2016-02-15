@@ -51,6 +51,8 @@ public class Tst<T> implements Trie<T> {
      */
     @Override
     public T put(String key, T value) {
+        notEmpty(key, "Key must be not null or not empty string.");
+
         return put(root, key, value);
     }
 
@@ -59,6 +61,7 @@ public class Tst<T> implements Trie<T> {
      */
     @Override
     public void putAll(Map<String, ? extends T> map) {
+        notNull(map, "Map can not be null");
 
         for(Map.Entry<String, ? extends T> entry : map.entrySet()) {
             put(entry.getKey(), entry.getValue());
@@ -70,6 +73,8 @@ public class Tst<T> implements Trie<T> {
      */
     @Override
     public boolean containsKey(String key) {
+        notEmpty(key, "Key must be not null or not empty string.");
+
         return get(key) != null;
     }
 
@@ -78,6 +83,8 @@ public class Tst<T> implements Trie<T> {
      */
     @Override
     public T get(String key) {
+        notEmpty(key, "Key must be not null or not empty string.");
+
         return get(root, key);
     }
 
@@ -86,6 +93,8 @@ public class Tst<T> implements Trie<T> {
      */
     @Override
     public T prefix(String key) {
+        notEmpty(key, "Key must be not null or not empty string.");
+
         return prefix(root, key);
     }
 
@@ -94,6 +103,8 @@ public class Tst<T> implements Trie<T> {
      */
     @Override
     public String prefixKey(String key) {
+        notEmpty(key, "Key must be not null or not empty string.");
+
         return prefixKey(root, key);
     }
 
@@ -102,6 +113,8 @@ public class Tst<T> implements Trie<T> {
      */
     @Override
     public T remove(String key) {
+        notEmpty(key, "Key must be not null or not empty string.");
+
         return remove(root, key);
     }
 
@@ -328,6 +341,19 @@ public class Tst<T> implements Trie<T> {
 
     private char getChar(String key, int index) {
         return key.charAt(index);
+    }
+
+    private void notNull(Object value, String message) {
+        if(value == null) {
+            throw new IllegalArgumentException(message);
+        }
+    }
+
+    private void notEmpty(String value, String message) {
+        notNull(value, message);
+        if(value.isEmpty()) {
+            throw new IllegalArgumentException(message);
+        }
     }
 
     private enum TraversedPathAction {
