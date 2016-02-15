@@ -51,9 +51,9 @@ The benchmark measures the time of retrieving and item or replacing it's value.
 | Data structure          | put() (ops/sec) | get() (ops/sec) |
 |-------------------------|-----------------|-----------------|
 | Tst                     |   2299545,308   |   8842305,865   |
-| ArrayTrie               |                 |   6006965,043   |
-| HashMapTrie             |                 |   2256343,001   |
-| TroveCharHashMapTrie    |                 |   1823093,485   |
+| ArrayTrie               |   3420565,537   |   6006965,043   |
+| HashMapTrie             |   1934020,719   |   2256343,001   |
+| TroveCharHashMapTrie    |   1455906,520   |   1823093,485   |
 | KolobokeCharHashMapTrie |                 |                 |
 
 ## TODO
