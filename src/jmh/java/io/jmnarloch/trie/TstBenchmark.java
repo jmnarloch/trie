@@ -16,7 +16,9 @@
 package io.jmnarloch.trie;
 
 /**
+ * Benchmark the {@link Tst}.
  *
+ * @author Jakub Narloch
  */
 public class TstBenchmark extends BaseTrieBenchmark {
 

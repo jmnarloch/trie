@@ -29,7 +29,9 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * The base benchmark class for the {@link Trie}.
  *
+ * @author Jakub Narloch
  */
 @State(Scope.Thread)
 @BenchmarkMode(Mode.AverageTime)

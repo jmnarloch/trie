@@ -16,7 +16,9 @@
 package io.jmnarloch.trie;
 
 /**
+ * Benchmark the {@link HashMapTrie}.
  *
+ * @author Jakub Narloch
  */
 public class HashMapTrieBenchmark extends BaseTrieBenchmark {
 

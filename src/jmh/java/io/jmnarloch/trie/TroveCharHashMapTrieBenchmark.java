@@ -16,9 +16,11 @@
 package io.jmnarloch.trie;
 
 /**
+ * Benchmark the {@link TroveCharHashMapTrie}.
  *
+ * @author Jakub Narloch
  */
-public class TroveCharHashMapBenchmark extends BaseTrieBenchmark {
+public class TroveCharHashMapTrieBenchmark extends BaseTrieBenchmark {
 
     @Override
     protected Trie<String> createTrie() {

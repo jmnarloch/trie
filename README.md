@@ -49,7 +49,7 @@ data structures that has been populated with 1024 unique entries.
 
 | Data structure       | put() (ns/op) | get() (ns/op) |
 |----------------------|---------------|---------------|
-| Tst                  |               |               |
+| Tst                  |    422,925    |    122,899    |
 | ArrayTrie            |    324,356    |    141,910    |
 | HashMapTrie          |    543,414    |    440,765    |
 | TroveCharHashMapTrie |    638,327    |    576,397    |

@@ -16,7 +16,9 @@
 package io.jmnarloch.trie;
 
 /**
+ * Benchmark the {@link KolobokeCharHashMapTrie}.
  *
+ * @author Jakub Narloch
  */
 public class KolobokeCharHashMapTrieBenchmark extends BaseTrieBenchmark {
 
