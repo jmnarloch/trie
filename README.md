@@ -60,7 +60,7 @@ The benchmark measures the throughput of retrieving a key value and inserting a 
 
 ## Memory foot print
 
-Tested on 64 bit JVM with enabled pointer compression (-XX:+UseCompressedOops - which enabled by default for Java 8)
+Tested on 64 bit JVM with enabled pointer compression (-XX:+UseCompressedOops - which is enabled by default for Java 8)
 
 | Data structure             | Memory (bytes) |
 |----------------------------|----------------|
@@ -74,7 +74,7 @@ Tested on 64 bit JVM with enabled pointer compression (-XX:+UseCompressedOops - 
 
 Measured using [JAMM](https://github.com/jbellis/jamm). The memory sized includes the object overhead and padding.
 
-* This includes size of empty HashMap, but it expands when new entries are being added.
+* HashMapTrie - the size appears to be size of empty HashMap, but it expands when new entries are being added.
 
 ## TODO
 
