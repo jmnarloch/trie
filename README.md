@@ -72,7 +72,7 @@ Tested on 64 bit JVM with enabled pointer compression (-XX:+UseCompressedOops - 
 | TroveCharHashMapTrie       |      320       |
 | KolobokeCharHashMapTrie    |      376       |
 
-Measured using [JAMM](https://github.com/jbellis/jamm). The memory sized includes the object overhead and padding.
+Measured using [JAMM](https://github.com/jbellis/jamm). The memory size includes the object overhead and padding.
 
 * HashMapTrie - the size appears to be size of empty HashMap, but it expands when new entries are being added.
 
