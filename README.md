@@ -46,7 +46,7 @@ The available implementation:
 
 Project includes simple JMH benchmark that measures the throughput of selected operations on the data structures.
 For the sake of the benchmark every Trie instance has been populated with 1024 unique entries.
-The benchmark measures the time of retrieving and item or replacing it's value.
+The benchmark measures the throughput of retrieving a key value and inserting a new one.
 
 | Data structure          | put() (ops/sec) | get() (ops/sec) |
 |-------------------------|-----------------|-----------------|
@@ -55,6 +55,26 @@ The benchmark measures the time of retrieving and item or replacing it's value.
 | HashMapTrie             |   1934020,719   |   2256343,001   |
 | TroveCharHashMapTrie    |   1455906,520   |   1823093,485   |
 | KolobokeCharHashMapTrie |                 |                 |
+
+* Benchmark run on Intel Core i7 2.2 GHz (4770HQ)
+
+## Memory foot print
+
+Tested on 64 bit JVM with enabled pointer compression (-XX:+UseCompressedOops - which enabled by default for Java 8)
+
+| Data structure             | Memory (bytes) |
+|----------------------------|----------------|
+| Tst                        |       56       |
+| ArrayTrie - Unicode        |     262184     |
+| ArrayTrie - Extended ASCII |     1064       |
+| ArrayTrie - ASCII          |      552       |
+| HashMapTrie                |       72*      |
+| TroveCharHashMapTrie       |      320       |
+| KolobokeCharHashMapTrie    |      376       |
+
+Measured using [JAMM](https://github.com/jbellis/jamm). The memory sized includes the object overhead and padding.
+
+* This includes size of empty HashMap, but it expands when new entries are being added.
 
 ## TODO
 
