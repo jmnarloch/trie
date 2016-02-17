@@ -204,21 +204,22 @@ public class Tst<T> implements Trie<T> {
 
         int index = 0;
         T value = null;
+        char c = getChar(key, index);
+
         while (node != null) {
-            if (index == key.length()) {
-                if (node.value != null) {
-                    value = node.value;
-                }
-                break;
-            }
-            final char c = getChar(key, index);
             if (c == node.c) {
-                if (node.value != null) {
+                index++;
+                node = moveNext(node, c);
+                if (node != null && node.value != null) {
                     value = node.value;
                 }
-                index++;
+                if (index == key.length()) {
+                    break;
+                }
+                c = getChar(key, index);
+            } else {
+                node = moveNext(node, c);
             }
-            node = moveNext(node, c);
         }
         return value;
     }
