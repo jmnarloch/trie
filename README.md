@@ -77,6 +77,18 @@ Measured using [JAMM](https://github.com/jbellis/jamm). The memory size includes
 
 * HashMapTrie - the size appears to be size of empty HashMap, but it expands when new entries are being added.
 
+After populating the Trie trees with 1024 random 36 character length strings we may expect fallowing results:
+
+| Data structure             | Memory (bytes) |
+|----------------------------|----------------|
+| Tst                        |     1553584    |
+| ArrayTrie - Unicode        |        -       |
+| ArrayTrie - Extended ASCII |    37300464    |
+| ArrayTrie - ASCII          |    19406576    |
+| HashMapTrie                |     6464752    |
+| TroveCharHashMapTrie       |    11301264    |
+| KolobokeCharHashMapTrie    |     6826752    |
+
 ## TODO
 
 * Compressed trie - Patricia trie
