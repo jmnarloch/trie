@@ -183,16 +183,19 @@ public class Tst<T> implements Trie<T> {
     private T get(TstNode node, String key) {
 
         int index = 0;
-        while (node != null) {
-            if (index == key.length()) {
-                return node.value;
-            }
-            final char c = getChar(key, index);
-            if (c == node.c) {
-                index++;
-            }
-            node = moveNext(node, c);
+        char c = getChar(key, index);
 
+        while(node != null) {
+            if (c == node.c) {
+                node = moveNext(node, c);
+                index++;
+                if (index == key.length()) {
+                    return node != null ? node.value : null;
+                }
+                c = getChar(key, index);
+            } else {
+                node = moveNext(node, c);
+            }
         }
         return null;
     }

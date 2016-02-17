@@ -50,7 +50,7 @@ The benchmark measures the throughput of retrieving a key value and inserting a 
 
 | Data structure          | put() (ops/sec) | get() (ops/sec) |
 |-------------------------|-----------------|-----------------|
-| Tst                     |   2299545,308   |   8842305,865   |
+| Tst                     |   2299545,308   |  10051031,796   |
 | ArrayTrie               |   3420565,537   |   6006965,043   |
 | HashMapTrie             |   1934020,719   |   2256343,001   |
 | TroveCharHashMapTrie    |   1455906,520   |   1823093,485   |
@@ -58,9 +58,12 @@ The benchmark measures the throughput of retrieving a key value and inserting a 
 
 * Benchmark run on Intel Core i7 2.2 GHz (4770HQ)
 
-## Memory foot print
+## Memory footprint
 
 Tested on 64 bit JVM with enabled pointer compression (-XX:+UseCompressedOops - which is enabled by default for Java 8)
+Measured using [JAMM](https://github.com/jbellis/jamm). The memory size includes the object overhead and padding.
+
+### Size of single tree node
 
 | Data structure             | Memory (bytes) |
 |----------------------------|----------------|
@@ -71,8 +74,6 @@ Tested on 64 bit JVM with enabled pointer compression (-XX:+UseCompressedOops - 
 | HashMapTrie                |       72*      |
 | TroveCharHashMapTrie       |      320       |
 | KolobokeCharHashMapTrie    |      376       |
-
-Measured using [JAMM](https://github.com/jbellis/jamm). The memory size includes the object overhead and padding.
 
 * HashMapTrie - the size appears to be size of empty HashMap, but it expands when new entries are being added.
 
