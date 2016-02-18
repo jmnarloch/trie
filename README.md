@@ -54,7 +54,7 @@ The benchmark measures the throughput of retrieving a key value and inserting a 
 | ArrayTrie               |   3420565,537   |   6006965,043   |
 | HashMapTrie             |   1934020,719   |   2256343,001   |
 | TroveCharHashMapTrie    |   1455906,520   |   1823093,485   |
-| KolobokeCharHashMapTrie |                 |                 |
+| KolobokeCharHashMapTrie |   1824541,577   |   3263378,461   |
 
 * Benchmark run on Intel Core i7 2.2 GHz (4770HQ)
 

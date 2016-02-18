@@ -8,6 +8,7 @@ plugins {
     id "com.github.hierynomus.license" version "0.11.0"
     id 'net.researchgate.release' version '2.1.2'
     id 'com.github.kt3k.coveralls' version '2.4.0'
+    id 'com.github.johnrengelman.shadow' version '1.2.2'
     id 'me.champeau.gradle.jmh' version '0.2.0'
 }
 
@@ -22,6 +23,7 @@ apply from: 'gradle/release.gradle'
 apply plugin: 'findbugs'
 apply plugin: 'pmd'
 
+apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'me.champeau.gradle.jmh'
 
 apply plugin: 'com.github.kt3k.coveralls'
@@ -61,6 +63,10 @@ dependencies {
 
     testCompile (libraries.junit)
     testCompile (libraries.mockito)
+}
+
+jmhJar {
+    mergeServiceFiles()
 }
 
 jmh {
