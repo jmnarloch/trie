@@ -41,6 +41,7 @@ being lower, equal or greater then given node character.
 The available implementation:
 
 * Tst
+* ImmutableTst
 
 ## Benchmark
 
@@ -92,7 +93,6 @@ After populating the Trie trees with 1024 random 36 character length strings we 
 ## TODO
 
 * Compressed trie - Patricia trie
-* Immutable trie
 
 ## License
 
