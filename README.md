@@ -36,7 +36,7 @@ The available Trie implementations are:
 ### Ternary Trie Tree
 
 In effort to minimize the memory consumption we can design our tree as a 3-way tree with node links corresponding to character
-being lower, equal or greater then given node character.
+being lower, equal or greater then character within given node.
 
 The available implementation:
 
