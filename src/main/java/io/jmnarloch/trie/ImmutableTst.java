@@ -35,7 +35,9 @@ public class ImmutableTst<T> extends AbstractTst<T> {
         if(map == null) {
             throw new IllegalArgumentException("Parameter 'map' can not be null.");
         }
-        super.putAll(map);
+        for (Map.Entry<String, ? extends T> entry : map.entrySet()) {
+            super.put(entry.getKey(), entry.getValue());
+        }
     }
 
     /**
